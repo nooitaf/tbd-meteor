@@ -219,6 +219,19 @@ button:hover {
   color: white;
 }
 
+.track-time {
+  color: #444;
+  /* font-style: italic; */
+}
+
+.track-time-duration {
+  color: #999;
+}
+
+.track-title {
+  color: gray;
+}
+
 .projection-button {
   background: #ddd;
   color: black;

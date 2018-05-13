@@ -34,7 +34,7 @@
                 {{#if notime}}
                   --:--
                 {{else}}
-                  {{niceDateDay date_start}} <span style="color:white;">{{niceDate date_start}}</span>
+                  {{niceDateDay date_start}} <span class="track-time">{{niceDate date_start}}</span>
                 {{/if}}
               </td>
               <td style="width:120px;">
@@ -42,7 +42,7 @@
                 {{type}}
               </td>
               <td>
-                <span style="color:white">{{title}}</span><br>
+                <span class="track-title">{{title}}</span><br>
                 {{usernameWithId owner}} - {{userEmail owner}} -
                 <a href="" class="submission-edit-toggle" style="color:#333;">EDIT</a>
               </td>
@@ -70,7 +70,7 @@
                 {{type}}
               </td>
               <td>
-                <span style="color:white">{{title}}</span><br>
+                <span class="track-title">{{title}}</span><br>
                 {{usernameWithId owner}} - {{userEmail owner}}
               </td>
             </tr>
@@ -92,7 +92,7 @@
                 {{#if notime}}
                   --:--
                 {{else}}
-                  {{niceDateDay date_start}} <span style="color:white;">{{niceDate date_start}}</span>
+                  {{niceDateDay date_start}} <span class="track-date">{{niceDate date_start}}</span>
                 {{/if}}
               </td>
               <td style="width:120px;">
@@ -100,7 +100,7 @@
                 {{type}}
               </td>
               <td>
-                <span style="color:white">{{title}}</span><br>
+                <span class="track-title">{{title}}</span><br>
                 {{usernameWithId owner}} - {{userEmail owner}} -
                 <a href="" class="submission-edit-toggle" style="color:#333;">EDIT</a>
               </td>
@@ -231,12 +231,12 @@
 <template name="daylisting">
   <div class="row daylisting" style="cursor:pointer">
     <div class="column" style="vertical-align:top;text-align:right;">
-      <span style="color:white">
+      <span class="track-time">
         {{#if notime}}
           --:--
         {{else}}
           {{niceDate date_start}}<br>
-          <span style="color:#444">{{niceDuration minutes}}</span>
+          <span class="track-time-duration">{{niceDuration minutes}}</span>
         {{/if}}
       </span>
     </div>

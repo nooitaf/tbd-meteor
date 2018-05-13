@@ -70,10 +70,6 @@ Meteor.publish("submissions", function() {
           canceled: {$ne: true}
         }]
       }]
-    }, {
-      fields: {
-        slots: 0
-      }
     })
   }
 });

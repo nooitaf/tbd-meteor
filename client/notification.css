@@ -1,6 +1,6 @@
 .notification-top {
-  position: relative;
-  width:auto;
+  position: absolute;
+  width:100%;
   background: #dd0000;
   font-size: 13px;
   letter-spacing: 1px;
@@ -11,4 +11,5 @@
   text-align: center;
   margin: 0 auto;
   display: block;
+  float: left;
 }

@@ -65,6 +65,13 @@ u {
   font-weight: normal;
 }
 
+h3 {
+  background: #bdd9ce;
+  padding: 5px 10px;
+  border: solid 1px green;
+  border-width: 1px 0;
+}
+
 h4 {
   font-size: 14px;
   /* letter-spacing: 1px; */

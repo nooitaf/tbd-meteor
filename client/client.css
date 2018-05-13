@@ -30,7 +30,7 @@ html, body {
   padding: 0;
   font-family: 'Effects Eighty', monospace;
   background: #f6f6f6;
-  background-image: url(/assets/images/dot5.png),  url(/assets/images/dot5.png);
+  background-image: url(/assets/images/dot6.png),  url(/assets/images/dot6.png);
   background-position: top left, top right;
   background-repeat: repeat-y;
   background-size: 1.5em auto ;

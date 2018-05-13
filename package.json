@@ -1,15 +1,27 @@
 {
-  "name": "hackon",
-  "private": true,
-  "scripts": {
-    "start": "meteor run"
+  "name": "tbd-meteor",
+  "version": "1.0.0",
+  "description": "tbd.camp - prediction and submission system",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nooitaf/tbd-meteor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nooitaf/tbd-meteor/issues"
+  },
+  "homepage": "https://github.com/nooitaf/tbd-meteor#readme",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.46",
-    "babel-runtime": "^6.23.0",
-    "bcrypt": "^1.0.3",
-    "markdown-it": "^8.3.1",
-    "meteor-node-stubs": "~0.2.4",
-    "npm": "^6.0.0"
+    "bcrypt": "^2.0.1",
+    "markdown-it": "^8.4.1"
   }
 }

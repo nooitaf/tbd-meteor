@@ -1,5 +1,5 @@
-# hackon-meteor
-hackon.nl - prediction and submission system
+# tbd-meteor
+tbd.camp - prediction and submission system
 
 ## how to
 1. install [meteor](https://meteor.com)

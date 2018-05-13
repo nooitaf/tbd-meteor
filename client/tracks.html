@@ -1,0 +1,269 @@
+<template name="trackItemsAdmin">
+  <h4>Edit Tracks:</h4>
+  {{#each tracks}}
+    <div class="row">
+        {{> trackListItem}}
+    </div>
+  {{/each}}
+  <br><br>
+  <div class="row">
+    <input type="text" name="add-track-item" value="" placeholder="name">
+    <input type="number" name="add-track-order" value="{{order}}" placeholder="order (int)"><br>
+    <textarea name="add-track-desc" rows="2" cols="80" placeholder="description (markdown)">{{desc}}</textarea><br>
+    <button type="button" name="add-track-submit" class="track-button">Add Track</button>
+  </div>
+</template>
+
+<template name="trackListItem">
+  <input type="text" name="track-name" value="{{name}}">
+  <input type="number" name="track-order" value="{{order}}">
+  <button type="button" name="update-track-submit">update</button>
+  <button type="button" name="remove-track-submit">delete</button>
+  <textarea name="track-desc" rows="2" cols="80">{{desc}}</textarea><br>
+</template>
+
+<template name="tracksEditor">
+  {{#if isAdmin}}
+    {{#if submissionsCanceled}}
+      <h5>Canceled Submissions</h5>
+      {{#each submissionsCanceled}}
+        <div class="row" style="border-top:1px dashed #333;">
+          <table>
+            <tr>
+              <td style="width:120px;">
+                {{#if notime}}
+                  --:--
+                {{else}}
+                  {{niceDateDay date_start}} <span style="color:white;">{{niceDate date_start}}</span>
+                {{/if}}
+              </td>
+              <td style="width:120px;">
+                {{minutes}} min<br>
+                {{type}}
+              </td>
+              <td>
+                <span style="color:white">{{title}}</span><br>
+                {{usernameWithId owner}} - {{userEmail owner}} -
+                <a href="" class="submission-edit-toggle" style="color:#333;">EDIT</a>
+              </td>
+            </tr>
+          </table>
+          {{#if isOpen}}
+            {{> submissionEdit}}
+          {{/if}}
+        </div>
+      {{/each}}
+      <hr>
+    {{/if}}
+    <br><br>
+    {{#if submissionsWithoutTrackId}}
+      <h5>Submissions without tracks, please choose one first</h5>
+      {{#each submissionsWithoutTrackId}}
+        <div class="row" style="border-top:1px dashed #333;">
+          <table>
+            <tr>
+              <td style="width:160px;">
+                {{> trackSelector}}
+              </td>
+              <td style="width:120px;">
+                {{minutes}} min<br>
+                {{type}}
+              </td>
+              <td>
+                <span style="color:white">{{title}}</span><br>
+                {{usernameWithId owner}} - {{userEmail owner}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      {{/each}}
+      <hr>
+    {{/if}}
+    {{#each tracks}}
+      <br><br>
+      <h5>{{name}}</h5>
+      <br>
+      {{#each submissionsByDateStartWithTrackId _id}}
+        <div class="row" style="border-top:1px dashed #333;">
+          <table>
+            <tr>
+              <td style="width:120px;">
+                {{#if canceled}}<span style="color:red;">CANCELED</span><br>{{/if}}
+                {{#if notime}}
+                  --:--
+                {{else}}
+                  {{niceDateDay date_start}} <span style="color:white;">{{niceDate date_start}}</span>
+                {{/if}}
+              </td>
+              <td style="width:120px;">
+                {{minutes}} min<br>
+                {{type}}
+              </td>
+              <td>
+                <span style="color:white">{{title}}</span><br>
+                {{usernameWithId owner}} - {{userEmail owner}} -
+                <a href="" class="submission-edit-toggle" style="color:#333;">EDIT</a>
+              </td>
+            </tr>
+          </table>
+          {{#if isOpen}}
+            {{> submissionEdit}}
+          {{/if}}
+        </div>
+      {{/each}}
+    {{/each}}
+  {{/if}}
+</template>
+
+<template name="trackDateSelector">
+  <select name="submission-date-start">
+    {{#each timetable}}
+      <option value="{{date}}" selected="{{#if isEqualDate date ../date_start}}selected{{/if}}">{{text}}</option>
+    {{/each}}
+  </select>
+</template>
+
+<template name="trackSelector">
+  <select name="submission-track">
+    <option value="0" selected="{{#unless ../track}}selected{{/unless}}">---</option>
+    {{#each tracks}}
+      <option value="{{_id}}" selected="{{#if isEqual _id ../track}}selected{{/if}}">{{name}}</option>
+    {{/each}}
+  </select>
+</template>
+
+<template name="trackSelectorNotime">
+  <input type="checkbox" class="notime" value="notime" name="submission-notime" checked="{{#if notime}}checked{{/if}}"><label style="font-size:13px;">Has no time (--:--)</label>
+</template>
+
+<template name="trackSelectorDays">
+  <input type="checkbox" name="day1" checked="{{#if day1}}checked{{/if}}"><label style="font-size:13px;">Day 1</label><br>
+  <input type="checkbox" name="day2" checked="{{#if day2}}checked{{/if}}"><label style="font-size:13px;">Day 2</label><br>
+  <input type="checkbox" name="day3" checked="{{#if day3}}checked{{/if}}"><label style="font-size:13px;">Day 3</label>
+</template>
+
+<template name="adminDays">
+  <hr>
+  <h5>Meta Text for each Day:</h5>
+  <h5>Day1</h5>
+  <textarea name="meta-days-1" rows="8" cols="80">{{metaTextDay1}}</textarea><br>
+  <button type="button" name="meta-days-1-submit">Update Day 1</button>
+  <hr>
+  <h5>Day2</h5>
+  <textarea name="meta-days-2" rows="8" cols="80">{{metaTextDay2}}</textarea><br>
+  <button type="button" name="meta-days-2-submit">Update Day 2</button>
+  <hr>
+  <h5>Day3</h5>
+  <textarea name="meta-days-3" rows="8" cols="80">{{metaTextDay3}}</textarea><br>
+  <button type="button" name="meta-days-3-submit">Update Day 3</button>
+  <hr>
+</template>
+
+
+<template name="day1">
+  {{> toggleMinimal}}
+  {{#markdown}}{{metaTextDay1}}{{/markdown}}
+  {{#each tracks}}
+    <h3>{{name}}</h3>
+    <h4>{{desc}}</h4>
+    {{#each submissionsByDateStartWithTrackId _id}}
+      {{#if notime}}
+        {{#if day1}}
+          {{> daylisting}}
+        {{/if}}
+      {{else}}
+        {{#if dateIsDay1 date_start}}
+          {{> daylisting}}
+        {{/if}}
+      {{/if}}
+    {{/each}}
+    <hr>
+  {{/each}}
+</template>
+
+<template name="day2">
+  {{> toggleMinimal}}
+  {{#markdown}}{{metaTextDay2}}{{/markdown}}
+  {{#each tracks}}
+    <h3>{{name}}</h3>
+    <h4>{{desc}}</h4>
+    {{#each submissionsByDateStartWithTrackId _id}}
+      {{#if notime}}
+        {{#if day2}}
+          {{> daylisting}}
+        {{/if}}
+      {{else}}
+        {{#if dateIsDay2 date_start}}
+          {{> daylisting}}
+        {{/if}}
+      {{/if}}
+    {{/each}}
+    <hr>
+  {{/each}}
+</template>
+
+<template name="day3">
+  {{> toggleMinimal}}
+  {{#markdown}}{{metaTextDay3}}{{/markdown}}
+  {{#each tracks}}
+    <h3>{{name}}</h3>
+    <h4>{{desc}}</h4>
+    {{#each submissionsByDateStartWithTrackId _id}}
+      {{#if notime}}
+        {{#if day3}}
+          {{> daylisting}}
+        {{/if}}
+      {{else}}
+        {{#if dateIsDay3 date_start}}
+          {{> daylisting}}
+        {{/if}}
+      {{/if}}
+    {{/each}}
+    <hr>
+  {{/each}}
+</template>
+
+<template name="toggleMinimal">
+  <button type="button" name="toggle-compress" style="float:right;font-size:11px;padding:2px 4px 2px 4px;">compress</button>
+  <button type="button" name="toggle-expand" style="float:right;font-size:11px;padding:2px 4px 2px 4px;margin-right:2px;">expand</button>
+</template>
+
+<template name="daylisting">
+  <div class="row daylisting" style="cursor:pointer">
+    <div class="column" style="vertical-align:top;text-align:right;">
+      <span style="color:white">
+        {{#if notime}}
+          --:--
+        {{else}}
+          {{niceDate date_start}}<br>
+          <span style="color:#444">{{niceDuration minutes}}</span>
+        {{/if}}
+      </span>
+    </div>
+    <div class="column" style="max-width:60%">
+      <b><u>{{title}}</u></b>
+    </div>
+  </div>
+  {{#if showInfo _id}}
+    <div class="row">
+      <div class="column" style="vertical-align:top;height:1px;">
+        <span style="color:transparent">--:--</span>
+      </div>
+        <div class="column" style="width:60%;">
+            {{#markdown}}{{text}}{{/markdown}}
+            <div class="row">
+              <div class="column" style="color:#333;">
+                Type: <br>
+                Length: <br>
+                Speaker: <br>
+              </div>
+              <div class="column" style="color:#666;">
+                {{type}}<br>
+                {{minutes}} minutes<br>
+                {{usernameWithId owner}}<br>
+              </div>
+            </div>
+        </div>
+    </div>
+  {{/if}}
+</template>

@@ -1,0 +1,89 @@
+<template name="admin_menu">
+  {{#if isAdmin}}
+    <div class="admin-menu">
+      <span style="color:white;">SysOp:</span>
+      <a href="/">home</a>
+      <a href="/faq">faq</a>
+      <a href="/day1">D1</a>
+      <a href="/day2">D2</a>
+      <a href="/day3">D3</a>
+      |
+      <a href="/admin/tracks">tracks</a>
+      <a href="/admin/subs">subs</a>
+      <a href="/admin/preds">preds</a>
+      <a href="/admin/users">users</a>
+      <a href="/admin/meta">meta</a>
+
+    </div>
+  {{/if}}
+</template>
+
+<template name="admin_meta">
+  {{#if isAdmin}}
+    {{> projectionItemsAdmin}}
+    {{> trackItemsAdmin}}
+    {{> adminDays}}
+    {{> exportView}}
+  {{/if}}
+</template>
+
+<template name="admin_subs">
+  {{#if isAdmin}}
+    {{> submission}}
+  {{/if}}
+</template>
+
+<template name="admin_preds">
+  {{#if isAdmin}}
+    {{> projectionStatus}}
+    {{> projectionItemsAdmin}}
+  {{/if}}
+</template>
+
+<template name="admin_users">
+  {{#if isAdmin}}
+    {{> adminUserlisting}}
+  {{/if}}
+</template>
+
+<template name="admin_tracks">
+  {{#if isAdmin}}
+    {{> tracksEditor}}
+  {{/if}}
+</template>
+
+
+<template name="adminUserlisting">
+  {{#each users}}
+    <h5>{{username}}</h5>
+    Submissions: {{submissionCountWithUserId _id}} {{#unless submissionCountWithUserId _id}}<b style="color:red">NO SUBMISSIONS</b> {{userEmail _id}}{{/unless}}<br>
+    {{#each ordersOfUserWithId _id}}
+      - {{order.name}}<br>
+    {{/each}}
+    <hr>
+  {{/each}}
+  <br><br><br>
+  <h5>Spamlist (All):</h5>
+  <textarea name="name" rows="8" cols="80">{{#each users}}{{userEmail _id}},{{/each}}</textarea>
+
+  <h5>Spamlist (No submissions only):</h5>
+  <textarea name="name" rows="8" cols="80">{{#each users}}{{#unless submissionCountWithUserId _id}}{{userEmail _id}},{{/unless}}{{/each}}</textarea>
+  <br><br>
+
+  <br><br>
+</template>
+
+
+<template name="exportView">
+  <div class="row" style="padding-top:20px;">
+    <h5>CSV - Submissions</h5>
+    <textarea name="name" rows="8" cols="80">Id,Username,Type,Length,Title,Text
+{{#each users}}{{#each submissionsWithUserId _id}}{{_id}},"{{../username}}","{{type}}",{{minutes}},{{csvify title}},{{csvify text}}
+{{/each}}{{/each}}</textarea>
+    <br><br>
+    <h5>CSV - Predictions</h5>
+    <textarea name="name" rows="8" cols="80">Id,Username,Ordername
+{{#each users}}{{#each ordersOfUserWithId _id}}{{_id}},"{{../username}}","{{order.name}}"
+{{/each}}{{/each}}</textarea>
+  </div>
+</template>

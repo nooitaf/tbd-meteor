@@ -1,0 +1,50 @@
+<template name="search">
+
+  <input type="text" name="searchInput" value="" placeholder="Search.." class="searchInput" autofocus="autofocus">
+
+  {{#each items}}
+    {{> searchlisting}}
+  {{/each}}
+
+</template>
+
+
+<template name="searchlisting">
+  <div class="row searchlisting" style="cursor:pointer">
+    <div class="column" style="vertical-align:top;text-align:right;">
+      <span style="color:white">
+        {{#if notime}}
+          &nbsp;&nbsp;&nbsp;--:--
+        {{else}}
+          {{niceDateDay date_start}} {{niceDate date_start}}<br>
+          <span style="color:#444">{{niceDuration minutes}}</span>
+        {{/if}}
+      </span>
+    </div>
+    <div class="column" style="max-width:60%">
+      <b><u>{{title}}</u></b><br><span style="color:gray;">{{trackNameWithId track}}</span>
+    </div>
+  </div>
+  {{#if showInfoSearch _id}}
+    <div class="row">
+      <div class="column" style="vertical-align:top;height:1px;">
+        <span style="color:transparent">--:--</span>
+      </div>
+        <div class="column" style="width:60%;">
+            {{#markdown}}{{text}}{{/markdown}}
+            <div class="row">
+              <div class="column" style="color:#333;">
+                Type: <br>
+                Length: <br>
+                Speaker: <br>
+              </div>
+              <div class="column" style="color:#666;">
+                {{type}}<br>
+                {{minutes}} minutes<br>
+                {{usernameWithId owner}}<br>
+              </div>
+            </div>
+        </div>
+    </div>
+  {{/if}}
+</template>

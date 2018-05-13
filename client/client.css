@@ -1,0 +1,386 @@
+@font-face {
+    font-family: 'Effects Eighty';
+    font-weight: normal;
+    font-style: normal;
+    src: url('/assets/fonts/effects-eighty/EffectsEighty.woff') format('woff'), url('/assets/fonts/effects-eighty/EffectsEighty.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Effects Eighty';
+    font-weight: bold;
+    font-style: normal;
+    src: url('/assets/fonts/effects-eighty/EffectsEightyBold.woff') format('woff'), url('/assets/fonts/effects-eighty/EffectsEightyBold.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Effects Eighty';
+    font-weight: normal;
+    font-style: italic;
+    src: url('/assets/fonts/effects-eighty/EffectsEightyItalic.woff') format('woff'), url('/assets/fonts/effects-eighty/EffectsEightyItalic.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Effects Eighty';
+    font-weight: bold;
+    font-style: italic;
+    src: url('/assets/fonts/effects-eighty/EffectsEightyBoldItalic.woff') format('woff'), url('/assets/fonts/effects-eighty/EffectsEightyBoldItalic.woff2') format('woff2');
+}
+
+html, body {
+  width: 100%;
+  margin: 0;
+  margin-top: 0px;
+  padding: 0;
+  font-family: 'Effects Eighty', monospace;
+  background: white;
+  background-image: url(/assets/images/dot5.png),  url(/assets/images/dot5.png);
+  background-position: top left, top right;
+  background-repeat: repeat-y;
+  background-size: 1.5em auto ;
+  color: black;
+  font-size: 13px;
+}
+
+.nothing {
+  animation: shake 1s;
+  animation-timing-function: ease-in-out;
+  /*animation-duration: 0.6s;*/
+  /*animation-delay: 1s;*/
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+}
+
+a, a:visited, a:link {
+  color: #777 !important;
+  padding-bottom: 0px;
+  border-bottom: 1px solid #aaaaaa;
+  text-decoration: none !important;
+}
+
+span {
+  color: black;
+  font-weight: bold;
+}
+
+u {
+  text-decoration: none;
+  border-bottom: 1px solid #000000;
+  font-weight: normal;
+}
+
+h4 {
+  font-size: 14px;
+  /* letter-spacing: 1px; */
+  /* color:white; */
+}
+
+h5 {
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0px;
+  padding: 0px;
+  /* color: black; */
+}
+
+hr {
+  border: 0px;
+  border-color: #004400;
+  border-bottom-width: 1px;
+  border-style: dashed;
+}
+
+.main {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  padding: 20px;
+  padding-bottom: 200px;
+  /*background:red;*/
+}
+
+.row {
+  padding: 5px 0px;
+  display: block;
+}
+
+.column {
+  display: inline-block;
+}
+
+.right {
+  float: right;
+}
+
+#login-buttons {
+  margin-right: auto;
+  /* background-color: black; */
+  text-align: right;
+}
+
+.login-buttons-dropdown-align- {
+  position: relative;
+  display: block;
+  width: 300px;
+  background: black;
+}
+
+.accounts-dialog {
+  background: black;
+  border: none;
+  color: #000000;
+  border-radius: 0px;
+}
+
+.login-form>div>input {
+  background: black;
+  border: none;
+  border-color: #000000;
+  border-radius: 0px;
+  border: 1px solid #000000;
+  /* font-family: monospace; */
+}
+
+.login-form>div>label {
+  /* font-family: monospace; */
+}
+
+.login-form>div>a {
+  /* font-family: monospace; */
+}
+
+#login-name-link::before {
+  content: "User: "
+}
+.login-form > div > label {
+  text-align: center;
+  width: 100%;
+  float:left;
+  font-family: monospace;
+  padding-bottom: 5px;
+}
+.login-form > div > input[type=text], .login-form > div > input[type=email] {
+  font-family: monospace;
+}
+
+a.login-close-text {
+  text-decoration: none !important;
+  padding: 0px !important;
+  border: none !important;
+}
+#login-buttons .login-button, .accounts-dialog .login-button {
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 80%;
+  font-family: 'Effects Eighty', monospace;
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
+  background: #aaa;
+  border: 1px solid #aaa;
+  border-radius: 0px;
+}
+
+#login-buttons .login-button:hover, .accounts-dialog .login-button {
+  background: #aaa;
+  color: #222;
+}
+
+#login-buttons input[type=text], .accounts-dialog input[type=text], #login-buttons input[type=email], .accounts-dialog input[type=email], #login-buttons input[type=password], .accounts-dialog input[type=password] {
+  background: #aaa;
+  color: #222;
+  border: 1px solid #aaa;
+  border-radius: 0px;
+}
+
+#login-dropdown-list {
+  background: #ddd;
+}
+
+.edit-home-submit {
+  display: block;
+}
+
+.flash-number {
+  animation-name: flash;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
+}
+
+button {
+  background: #000000;
+  color: #ddd;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px;
+  font-family: 'Effects Eighty', monospace;
+  font-size: 16px;
+}
+
+button:hover {
+  background: black;
+  border: 1px solid black;
+  color: white;
+}
+
+.projection-button {
+  background: #ddd;
+  color: black;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px;
+  font-family: 'Effects Eighty', monospace;
+  font-size: 16px;
+}
+
+.projection-button:hover {
+  background: black;
+  border: 1px solid #eee;
+  color: #eee;
+}
+
+.projection-button-count {
+  cursor: pointer;
+  background: #222;
+  border: none;
+  padding: 8px;
+  color: #eee;
+  font-weight: bold;
+  font-family: 'Effects Eighty', monospace;
+  font-size: 21px;
+  min-width: 40px;
+  text-align: right;
+}
+
+.projection-button-count:hover {
+  color: #999;
+  border:0px solid transparent;
+}
+
+table.timeslot-chooser {
+  /* border: gray 1px dotted; */
+}
+
+table.timeslot-chooser>tr {
+  border-bottom: 5px;
+}
+
+table.timeslot-chooser>tr>th {
+  background: gray;
+  color: black;
+  width: 80px;
+}
+
+table.timeslot-chooser>tr>td {
+  width: 120px;
+  height: 40px;
+  background: #222;
+  color: white;
+  text-align: center;
+}
+
+table.timeslot-chooser>tr>td:hover {
+  background: #333;
+  cursor: pointer;
+}
+
+table.timeslot-chooser>tr>td.selected {
+  background: #00ee00;
+  color: black;
+}
+
+input, textarea, select {
+  padding: 4px 8px;
+  background: black;
+  border: 1px solid black;
+  margin: 0px;
+  font-size: 14px;
+  font-family: monospace;
+  height: 24px;
+  color: #ddd;
+  /*min-width: 300px;*/
+}
+
+input[type='checkbox'] {
+  width: 0px;
+  height: 18px;
+  margin-bottom: 9px;
+}
+
+input[type='checkbox']+label {
+  font-size: 19px;
+  cursor: pointer;
+}
+
+input[type='checkbox']+label:before {
+  content: "[ ] ";
+}
+
+input[type='checkbox']:checked+label:before {
+  content: "[x] ";
+}
+
+textarea {
+  height: auto;
+  width: auto;
+  width: 80%;
+  font-family: monospace;
+}
+
+select {
+  height: auto;
+}
+
+@keyframes flash {
+  from {
+    color: white;
+  }
+  to {
+    color: #ee0000;
+  }
+}
+
+@keyframes crt {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+
+@keyframes tv_shaking {
+  from {
+    opacity: 0.1;
+    margin-top: -20px;
+  }
+  to {
+    opacity: 0.9;
+    margin-top: 20px;
+  }
+}
+
+@keyframes tv_hardcore {
+  from {
+    opacity: 0.1;
+    margin-top: -80px;
+    margin-left: -100px;
+  }
+  to {
+    opacity: 0.9;
+    margin-top: 0px;
+    margin-left: 100px;
+  }
+}
+
+@keyframes shake {
+  from {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    background: black;
+    overflow-y: scroll;
+  }
+  to {
+    width: 50%;
+    height: 1px;
+    overflow: hidden;
+    background: red;
+  }
+}

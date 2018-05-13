@@ -1,0 +1,14 @@
+.notification-top {
+  position: relative;
+  width:auto;
+  background: #dd0000;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: white;
+  padding:5px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}

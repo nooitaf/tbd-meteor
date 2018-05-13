@@ -1,0 +1,17 @@
+<template name="home">
+  <div class="row">
+    {{#if isTrue 'edit-home-active'}}
+      <button type="button" class="edit-home-submit">Save</button>
+      <textarea name="edit-home-text" rows="8" cols="80">{{metaTextHome}}</textarea>
+    {{else}}
+      {{#if isAdmin}}
+        <button type="button" class="edit-home">Edit</button>
+      {{/if}}
+      {{#markdown}}{{metaTextHome}}{{/markdown}}
+    {{/if}}
+  </div>
+  {{#if currentUser}}
+    {{> projection}}
+    {{> submission}}
+  {{/if}}
+</template>

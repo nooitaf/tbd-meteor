@@ -1,0 +1,145 @@
+<template name="submission">
+  {{#if isAdmin}}
+    {{> submissionItemsAdmin}}
+  {{else}}
+    <div class="row">
+      <h4>Your Submissions:</h4>
+      {{> submissionItems}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="submissionItems">
+  <div class="row">
+    {{#each submissionsWithCurrentUserId}}
+      {{> submissionItemsItem}}
+    {{else}}
+      - No submission(s) yet.
+    {{/each}}
+  </div>
+  <div class="row">
+    {{> submissionItemAdd}}
+  </div>
+</template>
+
+<template name="submissionItemAdd">
+  <h4 id="AddSubmission">Add a submission:</h4>
+  <button type="button" class="submission-show-form">+</button>
+  <div class="row" style="padding-left:50px; display:none;">
+    <h4>Type:</h4>
+    <select name="submission-type">
+      {{#each submissionTypes}}
+        <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+    <h4>Length in Minutes:</h4>
+    <select name="submission-minutes">
+      {{#each submissionMinutes}}
+        <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+    {{> timeslotSelector}}
+    <h4>Title:</h4>
+    <input type="text" name="submission-title" value="" style="width:80%;">
+    <h4>Description:</h4>
+    <textarea name="submission-text" rows="4" style="width:80%;"></textarea>
+    <br><br>
+    <button type="button" class="submission-submit">Submit Content</button>
+  </div>
+</template>
+
+<template name="submissionItemsItem">
+  <div class="row" style="border-bottom:1px dashed #333;">
+    <table>
+      <tr>
+        <td style="vertical-align:top">
+          <a href="" class="submission-edit-toggle" style="color:#333;">EDIT</a>
+        </td>
+        <td style="padding-left:10px;">
+          <span>{{title}}</span><br/>
+          ({{type}} - {{minutes}} minutes) {{#if isAdmin}} - {{usernameWithId owner}} - {{userEmail owner}}{{/if}}
+          {{#if isOpen}}
+            {{> submissionEdit}}
+          {{else}}
+            <div class="row">
+              <!-- {{#markdown}}{{text}}{{/markdown}} -->
+            </div>
+          {{/if}}
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+<template name="timeslotSelector">
+  <h4>Prefered timeslot(s)</h4>
+  <table class="timeslot-chooser">
+    <tr>
+      <th>6. July ></th>
+      <td data-slot="1" class="{{#if contains slots 1}}selected{{/if}}">12:00-16:00</td>
+      <td data-slot="2" class="{{#if contains slots 2}}selected{{/if}}">16:00-20:00</td>
+      <td data-slot="3" class="{{#if contains slots 3}}selected{{/if}}">20:00-00:00</td>
+      <td data-slot="4" class="{{#if contains slots 4}}selected{{/if}}">00:00-04:00</td>
+    </tr>
+    <tr>
+      <th>7. July ></th>
+      <td data-slot="5" class="{{#if contains slots 5}}selected{{/if}}">12:00-16:00</td>
+      <td data-slot="6" class="{{#if contains slots 6}}selected{{/if}}">16:00-20:00</td>
+      <td data-slot="7" class="{{#if contains slots 7}}selected{{/if}}">20:00-00:00</td>
+      <td data-slot="8" class="{{#if contains slots 8}}selected{{/if}}">00:00-04:00</td>
+    </tr>
+    <tr>
+      <th>8. July ></th>
+      <td data-slot="9"  class="{{#if contains slots 9}}selected{{/if}}">12:00-16:00</td>
+      <td data-slot="10" class="{{#if contains slots 10}}selected{{/if}}">16:00-20:00</td>
+      <td data-slot="11" class="{{#if contains slots 11}}selected{{/if}}">20:00-00:00</td>
+      <td data-slot="12" class="{{#if contains slots 12}}selected{{/if}}">00:00-04:00</td>
+    </tr>
+  </table>
+</template>
+<template name="submissionEdit">
+  <div class="row" style="padding-left:0px;">
+    {{#if isAdmin}}
+      <h4>Schedule</h4>
+      {{> trackDateSelector}}
+      {{> trackSelector}}
+      <br><br>
+      {{> trackSelectorNotime}}
+      {{#if notime}}
+        <p>{{> trackSelectorDays}}</p>
+      {{/if}}
+    {{/if}}
+    {{#if canceled}}
+      <h4 style="color:red;">CANCELED</h4>
+    {{/if}}
+    <h4>Type:</h4>
+    <select name="submission-type">
+      {{#each submissionTypes}}
+        <option value="{{this}}" selected="{{#if isEqual this ../type}}selected{{/if}}">{{this}}</option>
+      {{/each}}
+    </select>
+    <h4>Length in Minutes:</h4>
+    <select name="submission-minutes">
+      {{#each submissionMinutes}}
+        <option value="{{this}}" selected="{{#if isEqual this ../minutes}}selected{{/if}}">{{this}}</option>
+      {{/each}}
+    </select>
+    {{> timeslotSelector slots=slots}}
+    <h4>Title:</h4>
+    <input type="text" name="submission-title" value="{{title}}" style="width:80%;">
+    <h4>Description:</h4>
+    <textarea name="submission-text" rows="18" style="width:80%;">{{text}}</textarea>
+    <br><br>
+    <button type="button" class="submission-submit">Update Submission</button>
+    <button type="button" class="submission-delete" style="background:#990000;">Remove</button>
+  </div>
+</template>
+
+<template name="submissionItemsAdmin">
+  <h4>Submissions {{#if isAdmin}}({{countSubmissionsAll}}){{/if}}:</h4>
+  {{#each submissions}}
+    <div class="row">
+        {{> submissionItemsItem}}
+    </div>
+  {{/each}}
+</template>

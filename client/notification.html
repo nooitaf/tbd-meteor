@@ -1,0 +1,13 @@
+<template name="notification">
+  {{#if metaTextNotification}}
+    <div class="notification-top">
+      {{#markdown}}{{metaTextNotification}}{{/markdown}}
+    </div>
+  {{/if}}
+  {{#unless connected}}
+    <div class="notification-top" style="background:green;color:black;">
+      [Lost connection]<br>
+      ..reconnecting..
+    </div>
+  {{/unless}}
+</template>

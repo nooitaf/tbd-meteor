@@ -1,0 +1,6 @@
+Meta = new Mongo.Collection('meta')
+Orders = new Mongo.Collection('orders')
+Projection = new Mongo.Collection('projection')
+Submissions = new Mongo.Collection('submissions')
+Tracks = new Mongo.Collection('tracks')
+People = new Mongo.Collection('people')

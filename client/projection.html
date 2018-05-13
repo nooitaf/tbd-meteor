@@ -1,0 +1,58 @@
+<template name="projection">
+  {{#unless isAdmin}}
+    <div class="row">
+      <h4>Your Prediction:</h4>
+      {{> projectionItems}}
+    </div>
+  {{/unless}}
+</template>
+
+
+<template name="projectionStatus">
+  <div class="row">
+    <h4>All Predictions:</h4>
+    {{#each projections}}
+      <div class="row">
+        {{countProjectionsAll _id}} {{projectionNameWithId _id}}
+      </div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="projectionItems">
+  <div class="row">
+    {{#each projections}}
+      {{> projectionItemsItem}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="projectionItemsItem">
+  <div class="row">
+    <button type="button" name="button" class="projection-button-count">{{countProjections _id}}</button>
+    <button type="button" name="button" class="projection-button">{{name}}</button>
+    {{#if projectionIsMax _id}}<b style="color:red">MAXIMUM REACHED</b>{{/if}}
+  </div>
+</template>
+
+<template name="projectionItemsAdmin">
+  <h4>Edit Prediction Items:</h4>
+  {{#each projections}}
+    <div class="row">
+        {{> projectionListItem}}
+    </div>
+  {{/each}}
+  <br><br>
+  <div class="row">
+    <input type="text" name="add-projection-item" value="">
+    <input type="number" name="add-projection-max" value="1">
+    <button type="button" name="add-projection-submit" class="projection-button">Add Item</button>
+  </div>
+</template>
+
+<template name="projectionListItem">
+  <button type="button" name="remove-projection-submit">X</button>
+  <input type="text" name="projection-name" value="{{name}}">
+  <input type="number" name="projection-max" value="{{max}}">
+  <button type="button" name="update-projection-submit">update</button>
+</template>

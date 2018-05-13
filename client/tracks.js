@@ -29,7 +29,7 @@ UI.registerHelper('tracks', function(){
   return Tracks.find({},{sort:{order:1}})
 })
 UI.registerHelper('timetable', function(){
-  var day = moment('20170714')
+  var day = moment('20180706')
   var list = []
   for (var i = 0; i< 60/5*24*3; i++){
     list.push({text:day.format('dddd - HH:mm'), date:new Date(day)})

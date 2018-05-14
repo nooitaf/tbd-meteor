@@ -65,6 +65,24 @@ Template.timeslotSelector.events({
     } else {
       target.addClass('selected')
     }
+  },
+  'click .timeslot-chooser-all':function(e,t){
+    var tds = t.findAll('td')
+    _.each(tds, function(td){
+      var target = $(td)
+      if(!target.hasClass('selected')) {
+        target.addClass('selected')
+      }
+    })
+  },
+  'click .timeslot-chooser-none':function(e,t){
+    var tds = t.findAll('td')
+    _.each(tds, function(td){
+      var target = $(td)
+      if(target.hasClass('selected')) {
+        target.removeClass('selected')
+      }
+    })
   }
 })
 
@@ -82,7 +100,7 @@ Template.submissionEdit.events({
     var title = t.find('input[name=submission-title]').value || false
     var text = t.find('textarea[name=submission-text]').value || false
     var minutes = t.find('select[name=submission-minutes]').value || false
-    if (type && title && text) {
+    if (type && title && text && slots.length) {
       var item = {
         type: type,
         title: title,
@@ -114,16 +132,25 @@ Template.submissionItemAdd.events({
     }, 100);
   },
   'click .submission-submit': function(e,t){
+    var slots = []
+    var slotsSelected = t.findAll('td[class=selected]')
+    _.each(slotsSelected, function(slot){
+      var slotVal = $(slot).attr('data-slot')
+      if(slotVal >= 1) {
+        slots.push(parseInt(slotVal))
+      }
+    })
     var type = t.find('select[name=submission-type]').value || false
     var title = t.find('input[name=submission-title]').value || false
     var text = t.find('textarea[name=submission-text]').value || false
     var minutes = t.find('select[name=submission-minutes]').value || false
-    if (type && title && text) {
+    if (type && title && text && slots.length) {
       var item = {
         type: type,
         title: title,
         text: text,
         minutes: parseInt(minutes),
+        slots: _.uniq(slots),
         owner: Meteor.userId()
       }
       Submissions.insert(item, function(err,res){
@@ -138,7 +165,7 @@ Template.submissionItemAdd.events({
         }
       })
     } else {
-      alert('Please fill out type, title and text.')
+      alert('Please fill out type, title, description and choose at least one slot.')
     }
   }
 })

@@ -43,6 +43,10 @@
       {{else}}
         {{> loginButtons align="right"}}
       {{/if}}
+      {{#if currentUser}}
+        <br/>
+        <a href="/#profile">Your Data</a>
+      {{/if}}
     </div>
   </div>
 </template>

@@ -1,0 +1,13 @@
+<template name="cfp">
+  <div class="row">
+    {{#if isTrue 'edit-cfp-active'}}
+      <textarea name="edit-cfp-text" rows="40" style="width:100%;">{{metaTextCfp}}</textarea>
+      <button type="button" class="edit-cfp-submit">Save</button><br>
+    {{else}}
+      {{#markdown}}{{metaTextCfp}}{{/markdown}}
+      {{#if isAdmin}}
+      <button type="button" class="edit-cfp">Edit</button>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>

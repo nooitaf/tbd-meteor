@@ -133,11 +133,11 @@ UI.registerHelper('dateIsDay3', function(d){
 })
 
 Template.toggleMinimal.events({
-  'click button[name=toggle-compress]':function(){
+  'click .toggle-minimal-compress':function(){
     var openItems = Session.get('schedule-open-items') || []
     Session.set('schedule-open-items',[])
   },
-  'click button[name=toggle-expand]':function(){
+  'click .toggle-minimal-expand':function(){
     var openItems = Session.get('schedule-open-items') || []
     Submissions.find({}).forEach(function(item){
       openItems.push(item._id)

@@ -1,8 +1,9 @@
 <template name="admin_menu">
   {{#if isAdmin}}
     <div class="admin-menu">
-      <span style="color:white;">SysOp:</span>
+      <span style="color:red;">SysOp:</span>
       <a href="/">home</a>
+      <a href="/cfp">cfp</a>
       <a href="/faq">faq</a>
       <a href="/day1">D1</a>
       <a href="/day2">D2</a>
@@ -24,12 +25,16 @@
     {{> trackItemsAdmin}}
     {{> adminDays}}
     {{> exportView}}
+  {{else}}
+    <a href="/">home</a>
   {{/if}}
 </template>
 
 <template name="admin_subs">
   {{#if isAdmin}}
     {{> submission}}
+  {{else}}
+    <a href="/">home</a>
   {{/if}}
 </template>
 
@@ -37,18 +42,24 @@
   {{#if isAdmin}}
     {{> projectionStatus}}
     {{> projectionItemsAdmin}}
+  {{else}}
+    <a href="/">home</a>
   {{/if}}
 </template>
 
 <template name="admin_users">
   {{#if isAdmin}}
     {{> adminUserlisting}}
+  {{else}}
+    <a href="/">home</a>
   {{/if}}
 </template>
 
 <template name="admin_tracks">
   {{#if isAdmin}}
     {{> tracksEditor}}
+  {{else}}
+    <a href="/">home</a>
   {{/if}}
 </template>
 
@@ -76,12 +87,12 @@
 
 <template name="exportView">
   <div class="row" style="padding-top:20px;">
-    <h5>CSV - Submissions</h5>
+    <h4>CSV - Submissions</h4>
     <textarea name="name" rows="8" cols="80">Id,Username,Type,Length,Title,Text
 {{#each users}}{{#each submissionsWithUserId _id}}{{_id}},"{{../username}}","{{type}}",{{minutes}},{{csvify title}},{{csvify text}}
 {{/each}}{{/each}}</textarea>
     <br><br>
-    <h5>CSV - Predictions</h5>
+    <h4>CSV - Predictions</h4>
     <textarea name="name" rows="8" cols="80">Id,Username,Ordername
 {{#each users}}{{#each ordersOfUserWithId _id}}{{_id}},"{{../username}}","{{order.name}}"
 {{/each}}{{/each}}</textarea>

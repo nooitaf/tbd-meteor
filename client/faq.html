@@ -1,13 +1,13 @@
 <template name="faq">
   <div class="row">
     {{#if isTrue 'edit-faq-active'}}
-      <button type="button" class="edit-faq-submit">Save</button><br>
       <textarea name="edit-faq-text" rows="40" style="width:100%;">{{metaTextFaq}}</textarea>
+      <button type="button" class="edit-faq-submit">Save</button><br>
     {{else}}
-      {{#if isAdmin}}
-        <button type="button" class="edit-faq">Edit</button>
-      {{/if}}
       {{#markdown}}{{metaTextFaq}}{{/markdown}}
+      {{#if isAdmin}}
+      <button type="button" class="edit-faq">Edit</button>
+      {{/if}}
     {{/if}}
   </div>
 </template>

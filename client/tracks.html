@@ -27,7 +27,7 @@
     {{#if submissionsCanceled}}
       <h5>Canceled Submissions</h5>
       {{#each submissionsCanceled}}
-        <div class="row" style="border-top:1px dashed #333;">
+        <div class="row" style="border-top:1px dashed #ccc;">
           <table>
             <tr>
               <td style="width:120px;">
@@ -59,7 +59,7 @@
     {{#if submissionsWithoutTrackId}}
       <h5>Submissions without tracks, please choose one first</h5>
       {{#each submissionsWithoutTrackId}}
-        <div class="row" style="border-top:1px dashed #333;">
+        <div class="row" style="border-top:1px dashed #ccc;">
           <table>
             <tr>
               <td style="width:160px;">
@@ -84,7 +84,7 @@
       <h5>{{name}}</h5>
       <br>
       {{#each submissionsByDateStartWithTrackId _id}}
-        <div class="row" style="border-top:1px dashed #333;">
+        <div class="row" style="border-top:1px dashed #ccc;">
           <table>
             <tr>
               <td style="width:120px;">
@@ -144,7 +144,7 @@
 
 <template name="adminDays">
   <hr>
-  <h5>Meta Text for each Day:</h5>
+  <h4>Meta Text for each Day:</h4>
   <h5>Day1</h5>
   <textarea name="meta-days-1" rows="8" cols="80">{{metaTextDay1}}</textarea><br>
   <button type="button" name="meta-days-1-submit">Update Day 1</button>
@@ -161,11 +161,11 @@
 
 
 <template name="day1">
-  {{> toggleMinimal}}
   {{#markdown}}{{metaTextDay1}}{{/markdown}}
+  {{> toggleMinimal}}
   {{#each tracks}}
     <h3>{{name}}</h3>
-    <h4>{{desc}}</h4>
+    {{#if desc}}<p class="track-desc">{{desc}}</p>{{/if}}
     {{#each submissionsByDateStartWithTrackId _id}}
       {{#if notime}}
         {{#if day1}}
@@ -182,11 +182,11 @@
 </template>
 
 <template name="day2">
-  {{> toggleMinimal}}
   {{#markdown}}{{metaTextDay2}}{{/markdown}}
+  {{> toggleMinimal}}
   {{#each tracks}}
     <h3>{{name}}</h3>
-    <h4>{{desc}}</h4>
+    {{#if desc}}<p class="track-desc">{{desc}}</p>{{/if}}
     {{#each submissionsByDateStartWithTrackId _id}}
       {{#if notime}}
         {{#if day2}}
@@ -203,11 +203,11 @@
 </template>
 
 <template name="day3">
-  {{> toggleMinimal}}
   {{#markdown}}{{metaTextDay3}}{{/markdown}}
+  {{> toggleMinimal}}
   {{#each tracks}}
     <h3>{{name}}</h3>
-    <h4>{{desc}}</h4>
+    {{#if desc}}<p class="track-desc">{{desc}}</p>{{/if}}
     {{#each submissionsByDateStartWithTrackId _id}}
       {{#if notime}}
         {{#if day3}}
@@ -224,8 +224,12 @@
 </template>
 
 <template name="toggleMinimal">
-  <button type="button" name="toggle-compress" style="float:right;font-size:11px;padding:2px 4px 2px 4px;">compress</button>
-  <button type="button" name="toggle-expand" style="float:right;font-size:11px;padding:2px 4px 2px 4px;margin-right:2px;">expand</button>
+  <div class="row toggle-minimal">
+    <h4>All items:
+      <button type="button" class="toggle-minimal-expand">expand</button>
+      <button type="button" class="toggle-minimal-compress">compress</button>
+    </h4>
+  </div>
 </template>
 
 <template name="daylisting">

@@ -123,7 +123,7 @@ Template.submissionEdit.events({
 })
 Template.submissionItemAdd.events({
   'click .submission-show-form': function(e,t){
-    t.find('.row').style.display = 'block';
+    t.find('.row-second').style.display = 'block';
     t.find('.submission-show-form').style.display = 'none';
     setTimeout(function () {
       $('html,body').animate({
@@ -156,16 +156,26 @@ Template.submissionItemAdd.events({
       Submissions.insert(item, function(err,res){
         if (err) throw new Meteor.Error(err)
         if (res) {
-          t.find('.row').style.display = 'none';
+          t.find('.row-second').style.display = 'none';
           t.find('.submission-show-form').style.display = 'block';
           t.find('select[name=submission-type]').value = '---';
           t.find('select[name=submission-minutes]').value = '5';
           t.find('input[name=submission-title]').value = '';
           t.find('textarea[name=submission-text]').value = '';
+          _.each(t.findAll('td'), function(td){
+            var target = $(td)
+            if(target.hasClass('selected')) {
+              target.removeClass('selected')
+            }
+          })
         }
       })
     } else {
       alert('Please fill out type, title, description and choose at least one slot.')
     }
+  },
+  'click .submission-cancel': function(e,t){
+    t.find('.row-second').style.display = 'none';
+    t.find('.submission-show-form').style.display = 'block';
   }
 })

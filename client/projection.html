@@ -36,16 +36,16 @@
 </template>
 
 <template name="projectionItemsAdmin">
-  <h4>Edit Prediction Items:</h4>
+  <h4>Edit Prediction Items (name/max):</h4>
   {{#each projections}}
     <div class="row">
         {{> projectionListItem}}
     </div>
   {{/each}}
-  <br><br>
+  <br/>
   <div class="row">
-    <input type="text" name="add-projection-item" value="">
-    <input type="number" name="add-projection-max" value="1">
+    <input type="text" name="add-projection-item" placeholder="prediction name" value="">
+    <input type="number" name="add-projection-max" placeholder="max (int)" value="1">
     <button type="button" name="add-projection-submit" class="projection-button">Add Item</button>
   </div>
 </template>

@@ -19,6 +19,8 @@ The login and registration endpoints take the same inputs. Pass an object with t
 
 password is required, and you must have at least one of username or email.
 
+##### even though you can create an account without an email, it makes it easier for us to reach you in case of subbmission changes. It's also needed to reset your password. We will never send spam, promise ;)
+
 ---
 
 ## Responses
@@ -40,12 +42,12 @@ For any endpoints that require the default authentication, you must include the 
 - X-User-Id
 - X-Auth-Token
 
-#### curl -H "X-Auth-Token: f2KpRW7KeN9aPmjSZ" -H "X-User-Id: fbdpsNf4oHiX79vMJ" http://localhost:3000/api/articles/
+#### curl -H "X-Auth-Token: f2KpRW7KeN9aPmjSZ" -H "X-User-Id: fbdpsNf4oHiX79vMJ" https://tbd.camp/orders/
 
 ## all routes (as of writing):
-
+##### if you just want to fetch, concentrate on the /publications/ routes
 /meta
-/meta/:_id
+/meta/:\_id
 /methods/getFahrplan
 /methods/getFahrplanJson
 /methods/isMaxUpdate
@@ -55,12 +57,12 @@ For any endpoints that require the default authentication, you must include the 
 /noscript/fahrplan.json
 /noscript/fahrplan.txt
 /orders
-/orders/:_id
+/orders/:\_id
 /projection
-/projection/:_id
+/projection/:\_id
 /publications/api-routes
 /publications/meta
-/publications/meteor_autoupdate_clientVersions
+/publications/meteor\_autoupdate\_clientVersions
 /publications/orders
 /publications/people
 /publications/projection
@@ -68,8 +70,8 @@ For any endpoints that require the default authentication, you must include the 
 /publications/tracks
 /publications/userData
 /submissions
-/submissions/:_id
+/submissions/:\_id
 /tracks
-/tracks/:_id
+/tracks/:\_id
 /users/login
 /users/register

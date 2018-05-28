@@ -29,12 +29,12 @@ var md = require('markdown-it')({
 
 // NOJS
 var Api_NoJS = new Restivus({
-  useDefaultAuth: true,
+  useDefaultAuth: false,
   prettyJson: true,
   apiPath: 'noscript'
 });
 var HTMLHEAD = '<!doctype html><html><head><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="/noscript.css"><title>tbd-noscript</title></head><body><div class="main">'
-Api_NoJS.addRoute('/', {
+Api_NoJS.addRoute('', {
   authRequired: false,
   defaultHeaders: ''
 }, {
@@ -42,13 +42,72 @@ Api_NoJS.addRoute('/', {
     var out = ""
     out += HTMLHEAD
     out += md.render('---')
-    out += md.render('/')
+    out += md.render('<h1>/home</h1>')
     out += md.render('---')
     out += md.render(Meta.findOne().text_home) || ""
     out += md.render('---')
-    out += md.render('/faq')
+    out += md.render('<h1>/cfp</h1>')
+    out += md.render('---')
+    out += md.render(Meta.findOne().text_cfp) || ""
+    out += md.render('---')
+    out += md.render('<h1>/faq</h1>')
     out += md.render('---')
     out += md.render(Meta.findOne().text_faq) || ""
+    out += md.render('---')
+    out += "</div></body></html>"
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'text/html'
+      },
+      body: out
+    }
+  }
+});
+
+Api_NoJS.addRoute('fahrplan.txt', {
+  authRequired: false,
+  defaultHeaders: ''
+}, {
+  get: function() {
+    var out = ""
+    out += Meteor.call('getFahrplan')
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'text/html'
+      },
+      body: out
+    }
+  }
+});
+
+Api_NoJS.addRoute('fahrplan.json', {
+  authRequired: false,
+  defaultHeaders: ''
+}, {
+  get: function() {
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'text/html'
+      },
+      body: JSON.stringify(Meteor.call('getFahrplanJson'))
+    }
+  }
+});
+
+Api_NoJS.addRoute('docs/api', {
+  authRequired: false,
+  defaultHeaders: ''
+}, {
+  get: function() {
+    var out = ""
+    out += HTMLHEAD
+    out += md.render('---')
+    out += md.render('<h1>/api</h1>')
+    out += md.render('---')
+    out += md.render(Meta.findOne().text_api) || ""
     out += "</div></body></html>"
     return {
       statusCode: 200,

@@ -1,26 +1,3 @@
-// API
-var Api_noauth = new Restivus({
-  useDefaultAuth: true,
-  prettyJson: true,
-  apiPath: 'noauth'
-});
-Api_noauth.addRoute('fahrplan.txt', {
-  authRequired: false,
-  defaultHeaders: ''
-}, {
-  get: function() {
-    var out = "<pre>";
-    var out = "<pre>" + Meteor.call('createFahrplan')
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'text/html'
-      },
-      body: out
-    }
-  }
-});
-
 var DOC_WIDTH = 75
 var DOC_LEVELSPACES = 3
 
@@ -61,11 +38,11 @@ var DAY3 = {name:"Day 3",date:moment(D).add(2,'days')}
 var DAYS = [DAY1,DAY2,DAY3]
 
 Meteor.methods({
-  createFahrplan: function() {
+  getFahrplan: function() {
     var out = "";
-    out += addHeader(".O.", 0, 0)
-    out += addHeader("..O", 0, 0)
-    out += addHeader("OOO", 0, 0)
+    out += addHeader(" ", 0, 0)
+    out += addHeader("[TBD]", 0, 0)
+    out += addHeader(" ", 0, 0)
     for (const day of DAYS){
       out += addHeader(day.name)
       out += addHeader('...')
@@ -94,12 +71,8 @@ Meteor.methods({
   }
 })
 
-Api_noauth.addRoute('fahrplan.days.json', {
-  authRequired: false,
-  defaultHeaders: '',
-  prettyJson: true
-}, {
-  get: function() {
+Meteor.methods({
+  getFahrplanJson: function(){
     var out = {}
     for (const day of DAYS){
       out[day.name] = []
@@ -138,4 +111,4 @@ Api_noauth.addRoute('fahrplan.days.json', {
     }
     return out
   }
-});
+})

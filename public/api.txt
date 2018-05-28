@@ -1,0 +1,75 @@
+# [tbd] API
+
+## get all routes via:
+#### curl -k https://tbd.camp/publications/api-routes
+
+## login
+
+POST /users/login, POST /users/register
+
+#### curl https://tbd.camp/users/login -d "username=test&password=123456"
+#### curl https://tbd.camp/users/register -d "username=test&email=test@domain.net&password=123456"
+
+
+The login and registration endpoints take the same inputs. Pass an object with the following properties:
+
+- username
+- email
+- password
+
+password is required, and you must have at least one of username or email.
+
+---
+
+## Responses
+
+Both login and registration have the same response format.
+
+successful response:
+#### {  token: "string",  tokenExpires: "ISO encoded date string",  id: "user id" }
+
+error response:
+#### { error: "error-code", reason: "Human readable error string" }
+
+---
+
+## Authenticated Calls
+
+For any endpoints that require the default authentication, you must include the userId and authToken with each request under the following headers:
+
+- X-User-Id
+- X-Auth-Token
+
+#### curl -H "X-Auth-Token: f2KpRW7KeN9aPmjSZ" -H "X-User-Id: fbdpsNf4oHiX79vMJ" http://localhost:3000/api/articles/
+
+## all routes (as of writing):
+
+/meta
+/meta/:_id
+/methods/getFahrplan
+/methods/getFahrplanJson
+/methods/isMaxUpdate
+/methods/updateEmail
+/noscript/
+/noscript/docs/api
+/noscript/fahrplan.json
+/noscript/fahrplan.txt
+/orders
+/orders/:_id
+/projection
+/projection/:_id
+/publications/api-routes
+/publications/meta
+/publications/meteor_autoupdate_clientVersions
+/publications/orders
+/publications/people
+/publications/projection
+/publications/submissions
+/publications/tracks
+/publications/userData
+/submissions
+/submissions/:_id
+/tracks
+/tracks/:_id
+/users/login
+/users/register

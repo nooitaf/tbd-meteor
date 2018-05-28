@@ -1,0 +1,13 @@
+<template name="api">
+  <div class="row">
+    {{#if isTrue 'edit-api-active'}}
+      <button type="button" class="edit-api-submit">Save</button><br>
+      <textarea name="edit-api-text" rows="40" style="width:100%;">{{metaTextApi}}</textarea>
+    {{else}}
+      {{#if isAdmin}}
+      <button type="button" class="edit-api">Edit</button>
+      {{/if}}
+      {{#markdown}}{{metaTextApi}}{{/markdown}}
+    {{/if}}
+  </div>
+</template>

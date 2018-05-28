@@ -133,7 +133,7 @@ UI.registerHelper('dateIsDay3', function(d){
 })
 
 Template.toggleMinimal.events({
-  'click .toggle-minimal-compress':function(){
+  'click .toggle-minimal-collapse':function(){
     var openItems = Session.get('schedule-open-items') || []
     Session.set('schedule-open-items',[])
   },

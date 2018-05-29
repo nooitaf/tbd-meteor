@@ -21,7 +21,8 @@ Meteor.publish("projection", function () {
     return Projection.find({});
   } else {
     Projection.find().forEach(function(p){
-      Counts.publish(self, 'p'+p._id, Orders.find({'order._id':p._id, owner: self.userId}));
+      // -- bug -- why is this here? -- fails in api "cant change after send header"
+      //Counts.publish(self, 'p'+p._id, Orders.find({'order._id':p._id, owner: self.userId}));
     })
     return Projection.find({});
   }

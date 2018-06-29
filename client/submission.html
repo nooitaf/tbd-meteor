@@ -150,3 +150,65 @@
     </div>
   {{/each}}
 </template>
+
+<template name="submissions">
+  <div class="row">
+    {{#if isTrue 'edit-submissions-active'}}
+      <textarea name="edit-submissions-text" rows="8" cols="80">{{metaTextSubmissions}}</textarea>
+      <button type="button" class="edit-submissions-submit">Save</button>
+    {{else}}
+      {{#markdown}}{{metaTextSubmissions}}{{/markdown}}
+      {{#if isAdmin}}
+      <button type="button" class="edit-submissions">Edit</button>
+      {{/if}}
+    {{/if}}
+  </div>
+  <h4>Submissions ({{countSubmissionsAll}}):</h4>
+  {{#each submissions}}
+    <div class="row">
+        {{> submissionItem}}
+    </div>
+  {{/each}}
+</template>
+
+<template name="submissionItem">
+  <div class="row submission-row">
+    <table>
+      <tr>
+        <td style="vertical-align:top;width:50px;padding-top:8px;">
+          <a href="" class="submission-open-toggle" style="color:#333;border:none;font-size:28px;">{{#if isOpenSubmission}}-{{else}}+{{/if}}</a>
+        </td>
+        <td style="padding-left:10px;padding-top:5px;">
+          <span>{{title}}{{#if canceled}}<span style="color:red"> CANCELED</span>{{/if}}</span><br/>
+          <span class="submission-type-underline">({{type}} - {{minutes}} minutes)</span> {{#if isAdmin}} - {{usernameWithId owner}} - {{userEmail owner}}{{/if}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          {{#if isOpenSubmission}}
+            {{> submissionViewer}}
+          {{else}}
+            <div class="row">
+              <!-- {{#markdown}}{{text}}{{/markdown}} -->
+            </div>
+          {{/if}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<template name="submissionViewer">
+  <div class="row">
+    <table>
+      <tr>
+        <td style="vertical-align:top;width:50px;padding-top:8px;">
+          &nbsp;
+        </td>
+        <td style="padding-left:10px;padding-top:5px;color:#333;">
+          {{#markdown}}{{text}}{{/markdown}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>

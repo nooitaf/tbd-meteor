@@ -53,23 +53,6 @@ Meteor.publish("submissions", function() {
   var user = Meteor.users.findOne({
     _id: this.userId
   })
-  if (user && user.admin) {
-    Counts.publish(this, 'submissions', Submissions.find());
-    return Submissions.find({})
-  } else {
-    return Submissions.find({
-      $or: [{
-        owner: this.userId,
-        canceled: {$ne: true}
-      }, {
-        $and: [{
-          track: {
-            $ne: [null, false, '0']
-          }
-        }, {
-          canceled: {$ne: true}
-        }]
-      }]
-    })
-  }
+  Counts.publish(this, 'submissions', Submissions.find());
+  return Submissions.find({})
 });

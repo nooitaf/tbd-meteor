@@ -21,6 +21,44 @@ Template.submissionItemsItem.helpers({
   }
 })
 
+Template.submissions.events({
+  'click .edit-submissions': function(){
+    Session.set('edit-submissions-active',true)
+  },
+  'click .edit-submissions-submit': function(e,t){
+    var x = t.find('textarea[name=edit-submissions-text]') || ""
+    var meta = Meta.findOne()
+    Meta.update({_id:meta._id},{$set:{text_submissions:x.value}})
+    Session.set('edit-submissions-active',false)
+  }
+})
+
+UI.registerHelper('metaTextSubmissions', function(){
+  return Meta.findOne().text_submissions
+})
+
+Template.submissionItem.events({
+  'click .submission-open-toggle': function(e){
+    if (Session.equals('submission-open-id',this._id)){
+      Session.set('submission-open-id',false)
+    } else {
+      Session.set('submission-open-id',this._id)
+    }
+    setTimeout(function () {
+      $('html,body').animate({
+        scrollTop: $(e.target).offset().top - $(document.body).offset().top + $(document.body).scrollTop() - 30
+      },300);
+    }, 100);
+  }
+})
+
+Template.submissionItem.helpers({
+  isOpenSubmission:function(){
+      return Session.equals('submission-open-id',this._id)
+  }
+})
+
+
 UI.registerHelper('submissionTypes', function(){
   return ['---','lecture','(lightning)talk','workshop','installation','project','performance','pancakes','$somethingawesome','other']
 })

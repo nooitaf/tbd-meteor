@@ -70,7 +70,7 @@
     <h5>{{username}}</h5>
     Submissions: {{submissionCountWithUserId _id}} {{#unless submissionCountWithUserId _id}}<b style="color:red">NO SUBMISSIONS</b> {{userEmail _id}}{{/unless}}<br>
     {{#each ordersOfUserWithId _id}}
-      - {{order.name}}<br>
+      - {{projectionNameWithId order._id}}<br>
     {{/each}}
     <hr>
   {{/each}}

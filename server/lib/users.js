@@ -26,12 +26,13 @@ Meteor.publish('people', function() {
 });
 
 Meteor.startup(function(){
+  console.log('Server started: ' + new Date());
   var adminEmail = "admin@example.com";
   var adminUser = Meteor.users.findOne({'emails.0.address':adminEmail});
-  console.log(adminUser);
+  // console.log(adminUser);
   if (adminUser) {
     if (adminUser.admin) {
-      console.log(adminUser.username + ' is admin.');
+      // console.log(adminUser.username + ' is admin.');
       Roles.addUsersToRoles(adminUser._id, 'admin', Roles.GLOBAL_GROUP);
     } else {
       Meteor.users.update(adminUser._id, {$set:{admin:true}});
@@ -66,7 +67,7 @@ Meteor.methods({
     var self = this
     var emails = Meteor.users.findOne(this.userId).emails || []
     _.each(emails,function(e){
-      console.log(e)
+      // console.log(e)
       Accounts.removeEmail(self.userId, e.address)
     })
     Accounts.addEmail(this.userId, email)

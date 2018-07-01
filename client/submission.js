@@ -71,7 +71,7 @@ UI.registerHelper('countSubmissionsUser', function(pid){
     return Submissions.find({}).count() || "-"
 })
 UI.registerHelper('countSubmissionsAll', function(){
-    return Counts.get('submissions') || "-"
+  return Submissions.find().count() || "-"
 })
 UI.registerHelper('submissions', function(){
   return Submissions.find({},{sort:{date_created:-1}})

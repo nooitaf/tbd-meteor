@@ -53,6 +53,5 @@ Meteor.publish("submissions", function() {
   var user = Meteor.users.findOne({
     _id: this.userId
   })
-  Counts.publish(this, 'submissions', Submissions.find());
   return Submissions.find({})
 });

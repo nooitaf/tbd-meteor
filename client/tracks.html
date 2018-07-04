@@ -237,7 +237,8 @@
     <div class="column" style="vertical-align:top;text-align:right;">
       <span class="track-time">
         {{#if notime}}
-          --:--
+          --:--<br/>
+          <span class="track-time-duration">{{niceDuration minutes}}</span>
         {{else}}
           {{niceDate date_start}}<br>
           <span class="track-time-duration">{{niceDuration minutes}}</span>

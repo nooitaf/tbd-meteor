@@ -166,7 +166,7 @@
   {{#markdown}}{{metaTextDay1}}{{/markdown}}
   {{> toggleMinimal}}
   {{#each tracks}}
-    <h3>{{name}}</h3>
+    <h3>{{name}}{{#if hidden}} <span style="color:red;">HIDDEN</span>{{/if}}</h3>
     {{#if desc}}<p class="track-desc">{{desc}}</p>{{/if}}
     {{#each submissionsByDateStartWithTrackId _id}}
       {{#if notime}}
@@ -187,7 +187,7 @@
   {{#markdown}}{{metaTextDay2}}{{/markdown}}
   {{> toggleMinimal}}
   {{#each tracks}}
-    <h3>{{name}}</h3>
+    <h3>{{name}}{{#if hidden}} <span style="color:red;">HIDDEN</span>{{/if}}</h3>
     {{#if desc}}<p class="track-desc">{{desc}}</p>{{/if}}
     {{#each submissionsByDateStartWithTrackId _id}}
       {{#if notime}}
@@ -208,7 +208,7 @@
   {{#markdown}}{{metaTextDay3}}{{/markdown}}
   {{> toggleMinimal}}
   {{#each tracks}}
-    <h3>{{name}}</h3>
+    <h3>{{name}}{{#if hidden}} <span style="color:red;">HIDDEN</span>{{/if}}</h3>
     {{#if desc}}<p class="track-desc">{{desc}}</p>{{/if}}
     {{#each submissionsByDateStartWithTrackId _id}}
       {{#if notime}}

@@ -8,7 +8,8 @@
   <br><br>
   <div class="row">
     <input type="text" name="add-track-item" value="" placeholder="name">
-    <input type="number" name="add-track-order" value="{{order}}" placeholder="order (int)"><br>
+    <input type="number" name="add-track-order" value="{{order}}" placeholder="order (int)">
+    <input type="checkbox" name="track-hidden"><label style="font-size:13px;">Hidden Track</label><br>
     <textarea name="add-track-desc" rows="2" cols="80" placeholder="description (markdown)">{{desc}}</textarea><br>
     <button type="button" name="add-track-submit" class="track-button">Add Track</button>
   </div>
@@ -17,6 +18,7 @@
 <template name="trackListItem">
   <input type="text" name="track-name" value="{{name}}">
   <input type="number" name="track-order" value="{{order}}">
+  <input type="checkbox" name="track-hidden" checked="{{#if hidden}}checked{{/if}}"><label style="font-size:13px;">Hidden Track</label>
   <button type="button" name="update-track-submit">update</button>
   <button type="button" name="remove-track-submit">delete</button>
   <textarea name="track-desc" rows="2" cols="80">{{desc}}</textarea><br>

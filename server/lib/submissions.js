@@ -50,8 +50,11 @@ Submissions.allow({
 });
 
 Meteor.publish("submissions", function() {
-  var user = Meteor.users.findOne({
-    _id: this.userId
-  })
-  return Submissions.find({})
+  var user = Meteor.users.findOne({ _id: this.userId })
+  var hidden_tracks = _.pluck(Tracks.find({hidden:true}).fetch(),'_id')
+  if (user && user.admin){
+    return Submissions.find({})
+  } else {
+    return Submissions.find({$or:[{track:{$nin:hidden_tracks}},{owner:this.userId}]})
+  }
 });

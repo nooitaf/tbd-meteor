@@ -22,5 +22,10 @@ Template.exportView.helpers({
   }
 })
 UI.registerHelper('userEmail', function(uid){
-  return Meteor.users.findOne(uid).emails[0].address || "NOEMAIL"
+  var emails = Meteor.users.findOne(uid).emails
+  if (emails && emails.length && emails[0].address) {
+    return emails[0].address
+  } else {
+    return "NOEMAIL"
+  }
 })

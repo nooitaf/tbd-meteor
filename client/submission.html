@@ -59,7 +59,7 @@
         </td>
         <td style="padding-left:10px;">
           <span>{{title}}</span><br/>
-          <span class="submission-type-underline">({{type}} - {{minutes}} minutes)</span> {{#if isAdmin}} - {{usernameWithId owner}} - {{userEmail owner}}{{/if}}
+          <span class="submission-type-underline">({{type}} - {{minutes}} minutes{{#if track}} - {{trackNameWithId track}}{{/if}})</span> {{#if isAdmin}} - {{usernameWithId owner}} - {{userEmail owner}}{{/if}}
         </td>
       </tr>
       <tr>
@@ -180,7 +180,7 @@
         </td>
         <td style="padding-left:10px;padding-top:5px;">
           <span>{{title}}{{#if canceled}}<span style="color:red"> CANCELED</span>{{/if}}</span><br/>
-          <span class="submission-type-underline">({{type}} - {{minutes}} minutes)</span> {{#if isAdmin}} - {{usernameWithId owner}} - {{userEmail owner}}{{/if}}
+          <span class="submission-type-underline">({{type}} - {{minutes}} minutes{{#if track}} - {{trackNameWithId track}}{{/if}})</span> {{#if isAdmin}} - {{usernameWithId owner}} - {{userEmail owner}}{{/if}}
         </td>
       </tr>
       <tr>

@@ -7,7 +7,8 @@ Template.trackItemsAdmin.events({
     var name = t.find('input[name=add-track-item]').value
     var order = parseInt(t.find('input[name=add-track-order]').value) || 0
     var desc = t.find('textarea[name=add-track-desc]').value
-    if (name) Tracks.insert({name:name, order:order, desc:desc})
+    var hidden = t.find('input[name=track-hidden]').checked || 0
+    if (name) Tracks.insert({name:name, order:order, desc:desc, hidden:hidden})
   }
 })
 Template.trackListItem.events({
@@ -18,7 +19,8 @@ Template.trackListItem.events({
     var name = t.find('input[name=track-name]').value
     var order = parseInt(t.find('input[name=track-order]').value)
     var desc = t.find('textarea[name=track-desc]').value
-    Tracks.update({_id:this._id},{$set:{name:name, order:order, desc:desc}})
+    var hidden = t.find('input[name=track-hidden]').checked || 0
+    Tracks.update({_id:this._id},{$set:{name:name, order:order, desc:desc, hidden:hidden}})
   }
 })
 UI.registerHelper('trackNameWithId', function(pid){
@@ -26,7 +28,11 @@ UI.registerHelper('trackNameWithId', function(pid){
   return p && p.name
 })
 UI.registerHelper('tracks', function(){
-  return Tracks.find({},{sort:{order:1}})
+  if (Meteor.user().admin) {
+    return Tracks.find({},{sort:{order:1}})
+  } else {
+    return Tracks.find({hidden:{$ne:true}},{sort:{order:1}})
+  }
 })
 UI.registerHelper('timetable', function(){
   var day = moment('20180706')

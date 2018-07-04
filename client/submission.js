@@ -64,7 +64,7 @@ UI.registerHelper('submissionTypes', function(){
 })
 UI.registerHelper('submissionMinutes', function(){
   return [
-    5,10,15,20,30,45,60,90,120,180,240
+    5,10,15,20,30,45,60,90,120,180,240,300,360,420,480,540,600
   ]
 })
 UI.registerHelper('countSubmissionsUser', function(pid){

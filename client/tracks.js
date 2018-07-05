@@ -28,7 +28,7 @@ UI.registerHelper('trackNameWithId', function(pid){
   return p && p.name
 })
 UI.registerHelper('tracks', function(){
-  if (Meteor.user().admin) {
+  if (Meteor.user() && Meteor.user().admin) {
     return Tracks.find({},{sort:{order:1}})
   } else {
     return Tracks.find({hidden:{$ne:true}},{sort:{order:1}})
